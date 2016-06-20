@@ -1,31 +1,23 @@
 % Basic class for interacting with R through RServe
 classdef MatR < handle
+   properties
+      host = 'localhost'
+      port = 6311
+   end
+   
+   properties(Dependent = true)
+      isConnected
+   end
+   
    properties(SetAccess = private, Hidden = true)
       connection
       result
       pid
    end
-
-   properties(Dependent = true)
-      isConnected
-   end
       
    methods
       function self = MatR()
-         try
-            self.connect();
-         catch
-            % TODO 
-            path = fileparts(which('MatR'));
-            javaaddpathstatic([path filesep 'lib/REngine.jar'])
-            javaaddpathstatic([path filesep 'lib/RserveEngine.jar'])
-            % search or download jars
-            % add to static path
-            % https://rforge.net/Rserve/files/REngine.jar
-            % https://rforge.net/Rserve/files/RserveEngine.jar
-            %clear java;
-            self.connect();
-         end
+         self.connect();
          
          % Some R-side utilities
          path = fileparts(which('MatR'));
@@ -40,9 +32,11 @@ classdef MatR < handle
          end
       end
       
-      function connect(self,host,port)
+      function connect(self)
          import org.rosuda.REngine.Rserve.*;
-         self.connection = RConnection();
+         assert(exist('RConnection')==8,...
+            'RServe java components not installed. Run setupMatR.');
+         self.connection = RConnection(self.jstr(self.host),self.port);
          
          fprintf(1,'%s\n',self.Rversion);
          
@@ -141,7 +135,6 @@ classdef MatR < handle
    end
    
    methods(Static)
-      
       % Matlab to Java strings
       function str = jstr(x)
          if iscell(x)
