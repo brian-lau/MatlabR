@@ -1,12 +1,12 @@
 % Basic class for interacting with R through RServe
 classdef MatR < handle
-   properties (SetAccess = private)
+   properties(SetAccess = private, Hidden = true)
       connection
       result
       pid
    end
 
-   properties (Dependent = true)
+   properties(Dependent = true)
       isConnected
    end
       
@@ -27,7 +27,7 @@ classdef MatR < handle
             self.connect();
          end
          
-         %self.connect();
+         % Some R-side utilities
          path = fileparts(which('MatR'));
          self.source(['"' path filesep 'utils.R' '"']);
       end
@@ -105,32 +105,19 @@ classdef MatR < handle
          self.connection.voidEval(expression);
       end
       
-      function frame = plot(self,expression)
-%          import javax.swing.*
-%          
-%          frame = JFrame('test');
-%          frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-%          %frame.removeAll();
+      function plot(self,expression)
          id = char(java.util.UUID.randomUUID.toString);
-         self.eval(['jpeg("' [id '.jpg'] '",width=1000,height=1000,quality=100)']);
+         self.eval(['jpeg("' [id '.jpg'] '",width=800,height=800,quality=100)']);
          self.voidEval(expression);
          self.voidEval('dev.off()');
-%          
-%          image = JLabel();
-%          image.setIcon([]);
-%          image.setIcon(ImageIcon([self.pwd filesep [id '.jpg']]));
-%          %JLabel()
-%          %frame.setIconImage(image);
-%          %frame.add(image);
-%          %frame.validate();
-%          %frame.add(JLabel(ImageIcon('/Users/brian/Documents/Code/Repos/MatlabR/01.jpeg')));
-%          frame.setSize(450,450);
-%          frame.setVisible(1);
+
          figure;
          img = imread([self.pwd filesep [id '.jpg']]);
-         image(img);
+         imshow(img);
          axis off;
          axis image;
+         
+         delete([self.pwd filesep [id '.jpg']]);
       end
       
       function assign(self,name,value)
@@ -155,6 +142,7 @@ classdef MatR < handle
    
    methods(Static)
       
+      % Matlab to Java strings
       function str = jstr(x)
          if iscell(x)
             n = numel(x);
@@ -194,6 +182,29 @@ classdef MatR < handle
          end
          
          df = REXP().createDataFrame(l);
+      end
+      
+      % Convert Java representation to Matlab
+      function result = parse(x)
+         switch class(x)
+            case 'org.rosuda.REngine.REXPGenericVector'
+               if x.isList
+                  val = x.asList();
+                  fn = val.keys;
+                  
+                  for i = 1:numel(fn)
+                     str = strrep(char(fn(i)),'.','_');
+                     
+                     result.(str) = MatR.parse(val.get(fn(i)));
+                  end
+               else
+                  %?
+               end
+            case 'org.rosuda.REngine.REXPDouble'
+               result = x.asDoubles();
+            case 'org.rosuda.REngine.REXPFactor'
+               result = categorical(cell(x.asStrings()));
+         end
       end
    end
 end
