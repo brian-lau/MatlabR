@@ -23,7 +23,7 @@ r.result.asDoubles()
 which should return:
 ```
 ans =
-  10?1 int32 column vector
+  10x1 int32 column vector
     1
     2
     3
@@ -38,7 +38,7 @@ ans =
 
 Contributions
 --------------------------------
-MatlabR Copyright (c) 2016 Brian Lau [brian.lau@upmc.fr](mailto:brian.lau@upmc.fr), [BSD-3](https://github.com/brian-lau/MatlabR/blob/master/LICENSE.txt)
+MatlabR Copyright (c) 2016 Brian Lau [brian.lau@upmc.fr](mailto:brian.lau@upmc.fr), [BSD-2](https://github.com/brian-lau/MatlabR/blob/master/LICENSE.txt)
 
 [RServe](https://rforge.net/Rserve/) Copyright (c) Simon Urbanek, [GPL-2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
