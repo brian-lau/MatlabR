@@ -1,4 +1,4 @@
-% Basic class for interacting with R through RServe
+% Basic class for interacting with R through RServe Java client
 classdef MatR < handle
    properties
       host = 'localhost'
@@ -91,7 +91,7 @@ classdef MatR < handle
          disp(cell(msg.asStrings));
       end
       
-      function eval(self,expression)
+      function self = eval(self,expression)
          self.result = self.connection.eval(expression);
       end
       
@@ -116,6 +116,11 @@ classdef MatR < handle
       
       function assign(self,name,value)
          self.connection.assign(MatR.jstr(name),value);
+      end
+      
+      function shutdown(self)
+         self.connection.shutdown(); % Shutdown Rserve
+         self.close();
       end
       
       function delete(self)
@@ -197,6 +202,10 @@ classdef MatR < handle
                result = x.asDoubles();
             case 'org.rosuda.REngine.REXPFactor'
                result = categorical(cell(x.asStrings()));
+            case 'org.rosuda.REngine.REXPInteger'
+               result = x.asIntegers();
+            otherwise
+               error('Unrecognized class');
          end
       end
    end
