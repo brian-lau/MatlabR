@@ -1,5 +1,5 @@
 # MatlabR
-Connect Matlab to R using [RServe](https://rforge.net/Rserve/), a TCP/IP server that allows other programs to use facilities of R. A generic class (`MatR`) connects to RServe through its Java client. MatlabR is cross-platform since it relies on Java, which contrasts with other solutions which are Windows-only.
+Connect Matlab to R using [RServe](https://rforge.net/Rserve/), a TCP/IP server that allows other programs to use facilities of R. A generic class (`MatR`) connects to RServe through its Java client, which renders the interface platform independent. This contrasts with other solutions which are Windows-only.
 
 # Installation
 
