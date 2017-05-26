@@ -23,7 +23,6 @@ r.result.asDoubles()
 which should return:
 ```
 ans =
-  10x1 int32 column vector
     1
     2
     3
@@ -34,6 +33,20 @@ ans =
     8
     9
    10
+```
+Assign variables to R workspace:
+```
+r.assign('x',1:5)
+r.assign('y',0.5)
+r.eval('x*y').result.asDoubles()
+
+ans =
+
+    0.5000
+    1.0000
+    1.5000
+    2.0000
+    2.5000
 ```
 
 Contributions

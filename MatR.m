@@ -92,10 +92,12 @@ classdef MatR < handle
       end
       
       function self = eval(self,expression)
+         % Evaluate expression returning results to client
          self.result = self.connection.eval(expression);
       end
       
-      function voidEval(self,expression)
+      function self = voidEval(self,expression)
+         % Evaluate expression without returning results to client
          self.connection.voidEval(expression);
       end
       
