@@ -15,6 +15,9 @@ On the machine running Matlab (client):
 ```
 r = MatR();
 R version 3.3.3 (2017-03-06)
+```
+Evaluating simple commands:
+```
 r.eval('seq(1,10)');
 r.result.asDoubles()
 
