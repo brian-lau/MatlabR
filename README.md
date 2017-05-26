@@ -8,16 +8,14 @@ On the machine running R (server):
 ```
 library(RServe)
 run.Rserve()
-```
-This should display:
-```
 -- running Rserve in this R session (pid=1234), 1 server(s) --
 (This session will block until Rserve is shut down)
 ```
 On the machine running Matlab (client):
 ```
 r = MatR();
-r.eval('seq(1,10)')
+R version 3.3.3 (2017-03-06)
+r.eval('seq(1,10)');
 r.result.asDoubles()
 
 ans =
