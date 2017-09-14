@@ -2,6 +2,7 @@
 Connect Matlab to R using [Rserve](https://rforge.net/Rserve/), a TCP/IP server that allows other programs to use facilities of R. A generic class (`MatR`) connects to RServe through its Java client, which renders the interface platform independent. This contrasts with other solutions which are Windows-only.
 
 # Installation
+Add parent directory to your Matlab path, then run `setupMatR` in Matlab.
 
 # Usage
 On the machine running R (server):
