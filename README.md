@@ -6,7 +6,7 @@ Connect Matlab to R using [RServe](https://rforge.net/Rserve/), a TCP/IP server 
 # Usage
 On the machine running R (server):
 ```
-library(RServe)
+library(Rserve)
 run.Rserve()
 -- running Rserve in this R session (pid=1234), 1 server(s) --
 (This session will block until Rserve is shut down)
