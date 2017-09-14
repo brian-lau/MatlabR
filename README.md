@@ -1,5 +1,5 @@
 # MatlabR
-Connect Matlab to R using [RServe](https://rforge.net/Rserve/), a TCP/IP server that allows other programs to use facilities of R. A generic class (`MatR`) connects to RServe through its Java client, which renders the interface platform independent. This contrasts with other solutions which are Windows-only.
+Connect Matlab to R using [Rserve](https://rforge.net/Rserve/), a TCP/IP server that allows other programs to use facilities of R. A generic class (`MatR`) connects to RServe through its Java client, which renders the interface platform independent. This contrasts with other solutions which are Windows-only.
 
 # Installation
 
@@ -52,6 +52,6 @@ Contributions
 --------------------------------
 MatlabR Copyright (c) 2017 Brian Lau [brian.lau@upmc.fr](mailto:brian.lau@upmc.fr), [BSD-2](https://github.com/brian-lau/MatlabR/blob/master/LICENSE.txt)
 
-[RServe](https://rforge.net/Rserve/) Copyright (c) Simon Urbanek, [GPL-2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[Rserve](https://rforge.net/Rserve/) Copyright (c) Simon Urbanek, [GPL-2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 Please feel free to [fork](https://github.com/brian-lau/MatlabR/fork) and contribute!
